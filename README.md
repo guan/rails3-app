@@ -5,14 +5,14 @@ Easily generate a Rails 3 RC application with RSpec, Factory Girl, Haml, and
 jQuery in one line:
 
     % rails new my_app -J -T -m \
-    http://github.com/leshill/rails3-app/raw/master/app.rb
+    http://github.com/guan/rails3-app/raw/master/app.rb
 
 ## Need Cucumber?
 
 Use this generator file instead:
 
     % rails new my_app -J -T -m \
-    http://github.com/leshill/rails3-app/raw/master/cuke.rb
+    http://github.com/guan/rails3-app/raw/master/cuke.rb
 
 rvm
 ---
