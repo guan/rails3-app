@@ -29,6 +29,7 @@ gem 'looksee'
 gem 'wirble'
 
 group :test do
+  gem 'rspec-integration', '>= 2.0.0.beta.12'
   gem 'factory_girl_rails', '>= 1.0.0'
   gem 'rspec-integration', '>= 2.0.0.beta.12'
   gem 'ZenTest'
