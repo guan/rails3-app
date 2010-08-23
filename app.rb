@@ -5,22 +5,46 @@ RVMRC
 
 create_file ".rvmrc", rvmrc
 
-#gem "factory_girl_rails", ">= 1.0.0", :group => :test
-#gem "factory_girl_generator", ">= 0.0.1", :group => [:test, :development]
-#gem "haml-rails", ">= 0.0.2"
-#gem "rspec-rails", ">= 2.0.0.beta.12", :group => :test
+gitignore = <<-GITIGNORE
+*~
+.DS_Store
+.bundle
+config/database.yml
+db/*.db
+db/*.sql
+log/*.log
+tmp/**/*
+GITIGNORE
+
+run 'rm .gitignore'
+create_file ".gitignore", gitignore
+
+gemfile = <<-GEMFILE
+
+gem 'haml-rails', ">= 0.0.2"
+
+# Console display helpers
+gem 'awesome_print'
+gem 'looksee'
+gem 'wirble'
 
 group :test do
-      gem "factory_girl_rails", ">= 1.0.0"
-      gem "factory_girl_generator", ">= 0.0.1", :group => :development
-      gem "haml-rails", ">= 0.0.2"
-      gem "rspec-rails", ">= 2.0.0.beta.12", :group => :development
-      gem 'rspec-integration', '>= 2.0.0.beta.12'
-      gem 'ZenTest'
-      gem 'autotest-rails'
-      gem 'spork'
-      gem 'faker'
+  gem 'factory_girl_rails', '>= 1.0.0'
+  gem 'rspec-rails', '>= 2.0.0.beta.12'
 end
+
+group :test, :development do
+  gem 'factory_girl_generator', '>= 0.0.1'
+end
+
+group :test, :development, :staging do
+  # For debugging, use one of the following
+  # gem 'ruby-debug'   # For Ruby 1.8
+  # gem 'ruby-debug19' # For Ruby 1.9
+end
+GEMFILE
+
+append_file 'Gemfile', gemfile
 
 generators = <<-GENERATORS
 
@@ -37,6 +61,8 @@ get "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.1/jquery-ui.min.js", "pub
 get "http://github.com/rails/jquery-ujs/raw/master/src/rails.js", "public/javascripts/rails.js"
 
 gsub_file 'config/application.rb', 'config.action_view.javascript_expansions[:defaults] = %w()', 'config.action_view.javascript_expansions[:defaults] = %w(jquery.js jquery-ui.js rails.js)'
+
+run "cp config/database.yml config/database.yml.example"
 
 layout = <<-LAYOUT
 !!!
@@ -57,9 +83,12 @@ create_file "log/.gitkeep"
 create_file "tmp/.gitkeep"
 
 git :init
-git :add => "."
+git :add => '.'
 
 docs = <<-DOCS
+
+Note that the DEBUG gems have been commented out in the Gemfile
+Uncomment the gem that corresponds to your Ruby version
 
 Run the following commands to complete the setup of #{app_name.humanize}:
 
