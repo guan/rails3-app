@@ -5,10 +5,22 @@ RVMRC
 
 create_file ".rvmrc", rvmrc
 
-gem "factory_girl_rails", ">= 1.0.0", :group => :test
-gem "factory_girl_generator", ">= 0.0.1", :group => [:test, :development]
-gem "haml-rails", ">= 0.0.2"
-gem "rspec-rails", ">= 2.0.0.beta.12", :group => :test
+#gem "factory_girl_rails", ">= 1.0.0", :group => :test
+#gem "factory_girl_generator", ">= 0.0.1", :group => [:test, :development]
+#gem "haml-rails", ">= 0.0.2"
+#gem "rspec-rails", ">= 2.0.0.beta.12", :group => :test
+
+group :test do
+      gem "factory_girl_rails", ">= 1.0.0"
+      gem "factory_girl_generator", ">= 0.0.1", :group => :development
+      gem "haml-rails", ">= 0.0.2"
+      gem "rspec-rails", ">= 2.0.0.beta.12", :group => :development
+      gem 'rspec-integration', '>= 2.0.0.beta.12'
+      gem 'ZenTest'
+      gem 'autotest-rails'
+      gem 'spork'
+      gem 'faker'
+end
 
 generators = <<-GENERATORS
 
