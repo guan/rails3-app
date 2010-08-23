@@ -30,11 +30,16 @@ gem 'wirble'
 
 group :test do
   gem 'factory_girl_rails', '>= 1.0.0'
-  gem 'rspec-rails', '>= 2.0.0.beta.12'
+  gem 'rspec-integration', '>= 2.0.0.beta.12'
+  gem 'ZenTest'
+  gem 'autotest-rails'
+  gem 'spork'
+  gem 'faker'
 end
 
 group :test, :development do
   gem 'factory_girl_generator', '>= 0.0.1'
+  gem 'rspec-rails', '>= 2.0.0.beta.12'
 end
 
 group :test, :development, :staging do
